@@ -4,4 +4,55 @@
   padding: 0;
 }
 
-// TODO
+:root{
+  --pink: #FF57B2;
+  --white: #F8F8F8;
+  --black: #1A1D23;
+
+  --gray-450: #BBBBBB;
+  --gray-200: #D7D7D7;
+}
+
+html {
+  background: var(--black);
+  font-family: 'Inter', sans-serif;
+
+  strong {
+    font-weight: bold;
+    font-size: 1.75rem;
+    line-height: 2.125rem;
+    text-align: justify;
+    letter-spacing: -0.5px;
+    color: var(--white);
+  }
+
+  p{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.125rem;
+    line-height: 1.375rem;
+    text-align: justify;
+    color: var(--gray-200);
+  }
+}
+
+@media(max-width: 1080px){
+  html {
+      font-size: 93.75%;
+  }
+}
+
+@media(max-width: 720){
+  html {
+      font-size: 87.5%;
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+

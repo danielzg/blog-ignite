@@ -1,1 +1,37 @@
-// TODO
+.header{
+    display: flex;
+    height: 150px;
+    width: 100%;
+    align-items: center;
+    margin-left: 370px;
+}
+
+.container{
+    margin-left: 370px;
+
+    button{
+        background: var(--black);
+        color: var(--pink);
+        border: none;
+        height: 1.375rem;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1.125rem;
+        line-height: 1.375rem;
+        text-align: justify;
+    }
+
+    .posts{
+        
+    }
+
+    .info{
+        width: 260px;
+        display: flex;
+        align-items: center;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 0.875rem;
+        color: var(--gray-450);
+    }
+}
