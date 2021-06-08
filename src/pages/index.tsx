@@ -8,7 +8,7 @@ import { getPrismicClient } from '../services/prismic';
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
-import { RichText } from 'prismic-dom';
+import { useEffect, useState } from 'react';
 
 interface Post {
   uid?: string;
@@ -30,6 +30,55 @@ interface HomeProps {
 }
 
 export default function Home({postsPagination}: HomeProps) {
+
+  const [posts, setPosts] = useState<Post[]>(postsPagination.results);
+  const [newPage, setNewPage] = useState('')
+
+  const firstPage = postsPagination.next_page;
+
+  useEffect( () => {
+
+    if(newPage){
+      getMorePosts(newPage);
+    }
+
+  }, [newPage])
+
+  async function getMorePosts(pageCharge) {
+    let clonePosts = posts.slice()
+    const newPosts = await fetch(pageCharge)
+                                .then(response => response.json())
+    
+    const postsOrganized = newPosts.results.map( (newPost) => {
+
+      return {
+        uid: newPost.uid,
+        first_publication_date: format(parseISO(newPost.last_publication_date), 'd MMM yy', { locale: ptBR }),
+        data: {
+          title: newPost.data.title,
+          subtitle: newPost.data.subtitle,
+          author: newPost.data.author
+        }
+      }
+    } )
+    
+    clonePosts.push(...postsOrganized)
+    setPosts(clonePosts)
+  }
+  
+  async function handleCarregaPosts (next_page) {
+
+    if(next_page == ''){
+      setNewPage(firstPage)
+      return;
+    }
+    
+    const newPosts = await fetch(next_page)
+                                .then(response => response.json())
+    setNewPage(newPosts.next_page)
+                                   
+  }
+
   return (
     <>
       <header className={styles.header}>
@@ -37,7 +86,7 @@ export default function Home({postsPagination}: HomeProps) {
       </header>
       <main className={styles.container}>
         <div className={styles.posts}>
-          {postsPagination.results.map(post => (
+          {posts.map(post => (
             <Link href="#">
             <a key={post.uid}>
               <strong>{post.data.title}</strong>
@@ -52,9 +101,14 @@ export default function Home({postsPagination}: HomeProps) {
           </Link>
           ))}
           
+          
         </div>
 
-        <button>Carregar mais posts</button>
+        <button
+        onClick={() => {
+          handleCarregaPosts(newPage)}
+        }
+        >Carregar mais posts</button>
       </main>
     </>
   )
@@ -66,10 +120,8 @@ export const getStaticProps: GetStaticProps = async () => {
       Prismic.predicates.at('document.type', 'post')
   ],{
     fetch: ['post.title', 'post.subtitle', 'post.author'],
-    pageSize: 5
+    pageSize: 2
   })
-
-  console.log(JSON.stringify(postsResponse, null, 2))
 
   const posts = postsResponse.results.map(post => {
     return {
@@ -87,7 +139,7 @@ export const getStaticProps: GetStaticProps = async () => {
   })
 
   const postsPagination: PostPagination = {
-    next_page: 'trd',
+    next_page: postsResponse.next_page,
     results: posts
   }
 

@@ -1,6 +1,6 @@
 .header{
     display: flex;
-    height: 150px;
+    height: 160px;
     width: 100%;
     align-items: center;
     margin-left: 370px;
@@ -19,11 +19,10 @@
         font-size: 1.125rem;
         line-height: 1.375rem;
         text-align: justify;
+        margin-top: 2rem;
     }
 
-    .posts{
-        
-    }
+    
 
     .info{
         width: 260px;
@@ -33,5 +32,24 @@
         font-weight: normal;
         font-size: 0.875rem;
         color: var(--gray-450);
+        justify-content: space-between;
+        margin-top: 25px;
     }
+
+    
+}
+
+.posts{
+
+    max-width: 700px;
+
+    a {
+        display: block;
+        margin-top: 50px;
+    }
+
+    strong {
+        margin-top: 0.5rem;
+    }
+
 }
