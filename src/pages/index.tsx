@@ -87,7 +87,7 @@ export default function Home({postsPagination}: HomeProps) {
       <main className={styles.container}>
         <div className={styles.posts}>
           {posts.map(post => (
-            <Link href="#">
+            <Link href={`/post/${post.uid}`}>
             <a key={post.uid}>
               <strong>{post.data.title}</strong>
               <p>{post.data.subtitle}</p>
@@ -126,15 +126,12 @@ export const getStaticProps: GetStaticProps = async () => {
   const posts = postsResponse.results.map(post => {
     return {
       uid: post.uid,
-      first_publication_date: format(parseISO(post.last_publication_date), 'd MMM yy', { locale: ptBR }),
+      first_publication_date: format(parseISO(post.last_publication_date), 'd MMM yyyy', { locale: ptBR }),
       data: {
         title: post.data.title,
         subtitle: post.data.subtitle,
         author: post.data.author
       }
-      // banner: post.data.banner,
-      // contentHeading: post.data.content.find(content => content.type == 'heading')?.text ?? '',
-      // contentBody: post.data.content.find(content => content.type == 'body')?.text ?? '',
     }
   })
 

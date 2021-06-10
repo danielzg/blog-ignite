@@ -1,1 +1,62 @@
-// TODO
+.banner{
+    display: block;
+    left: 0px;
+    top: 0px;
+    
+    img{
+        height: 400px;
+        width: 1440px;
+
+    }
+}
+
+.main{
+    width: 721px;
+    margin-left: 350px;
+    top: 1rem;
+    height: 100vh;
+    display: block;
+
+    strong{
+        margin-top: 3rem;
+        display: block;
+    }
+
+    p {
+        display: block;
+        margin-top: 1rem;
+    }
+
+    >div{
+        margin-top: 1rem;
+    }
+
+    .title{
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 3rem;
+        line-height: 3.5rem;
+        letter-spacing: -0.5px;
+        color: var(--white);
+        display: block;
+    }
+    
+    .info{
+
+        width: 390px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        font-style: normal;
+        font-weight: normal;
+        font-size: 0.875rem;
+        color: var(--gray-450);
+        margin-top: 1rem;
+
+        letter-spacing: -0.5px;
+    }
+}
+    
